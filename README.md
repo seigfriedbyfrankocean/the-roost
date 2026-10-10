@@ -2,7 +2,7 @@
 
 a cozy animal crossing "roost" cafe style focus timer for your desktop. work for a bit, chill for a bit, repeat, with music and rain going in the background.
 
-![the roost banner screen](screenshot.png)
+![the roost banner](banner.png)
 
 ## what it does
 
@@ -32,10 +32,24 @@ a cozy animal crossing "roost" cafe style focus timer for your desktop. work for
 
 the game music, ambience sounds, sound effects, fonts and album covers aren't in this repo because they belong to their owners. to get sound working, make these folders in the project root and drop in your own files: `OSTs/`, `ambience/`, `fx/`, `album-covers/`, `font/`.
 
+## make it yours
+
+fork this repo and fill the folders above with whatever music, ambience and art you like. right now, the main tracklist of the app by default is:
+Animal Crossing — Nintendo GameCube (2001)
+Animal Crossing: Wild World — Nintendo DS (2005)
+Animal Crossing: City Folk — Nintendo Wii (2008)
+Animal Crossing: New Leaf — Nintendo 3DS (2012)
+Animal Crossing: New Horizons — Nintendo Switch (2020)
+Minecraft – Volume Alpha (2011)
+Minecraft - Volume Beta (2013)
+Super Mario Galaxy (2007)
+The Legend of Zelda: Breath Of The Wild (2016)
+if you make your own version, i'd love to see it!
+
 ## what i learned
 
 this was my first real project. i wrote out all the features in a notebook and sketched the ui before building anything, which made the actual building way smoother. i split the plan into a barebones version and an "advanced" version, built the barebones one first, and cut a few ideas that didn't fit the cozy cafe vibe. Google's Gemini helped me translate my ideas into reality and the journey itself taught me a lot of how the logic behind deployed projects work. i had a lot of fun working on this project and i'm a huge animal crossing fan as well :D i aspire to become entirely independent and stop relying on generative AI and compeletely code on my own for my creative freedom. i also learned git and github to push it online for yall :). this is my first independent project and definitely wont be my last :D
 
 ## disclaimer
 
-just a
+just a fan project, not affiliated with or endorsed by nintendo.
