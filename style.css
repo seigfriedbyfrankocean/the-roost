@@ -1,0 +1,530 @@
+@font-face {
+  font-family: 'FinkHeavy Regular';
+  src: url('font/FinkHeavy Regular.ttf') format('truetype');
+  font-weight: light;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'seurat';
+  src: url('font/FOT-Seurat Pro B.otf') format('truetype');
+  font-weight: light;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#custom-titlebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    background: transparent; /* Makes the background completely invisible */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    user-select: none;
+}
+
+.titlebar-drag-region {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    -webkit-app-region: drag; /* Draggable anywhere along the top left */
+}
+
+.titlebar-title {
+    font-family: 'FinkHeavy Regular', sans-serif; /* Uses your custom game font */
+    color: #ffffff; /* Clean white text */
+    font-size: 14px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Adds a subtle drop shadow so it pops against the background */
+    letter-spacing: 0.5px;
+}
+
+.titlebar-controls {
+    display: flex;
+    height: 100%;
+    -webkit-app-region: no-drag; /* Keeps buttons clickable */
+}
+
+.titlebar-controls button {
+    background-color: #00c7b9; /* Subtle dark pill shape for visibility */
+    border: none;
+    color: white;
+    width: 48px;
+    height: 36px;
+    margin-right: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.titlebar-controls button:hover {
+    background: rgb(47, 114, 145)
+    transition: transform 0.2s ease;
+}
+
+#close-btn:hover {
+    background: #e81123; /* Red hover for close */
+}
+
+/* Hides scrollbars globally across the app */
+html, body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* Replace .logo with whatever class or tag you gave your logo image */
+.logo {
+  width: 100%;           /* Makes it flexible and responsive */
+  max-width: 400px;      /* Caps it cleanly at your large 400px size */
+  height: auto;          /* Keeps proportions correct */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 10px auto; /* Centers it and adds a nice gap below it */
+}
+
+head {
+    font-family: 'Chewy';
+}
+
+/* Toast Notification Container - Matching the Clock's Colors */
+#now-playing-toast {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fcf6e5; /* Matches the clock container background */
+    border: 3px solid #d4c39c; /* Matches the clock container border */
+    border-radius: 10px; /* Matches the clock container border-radius */
+    padding: 14px 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transform: translateX(-120%);
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.7s ease;
+}
+
+/* Slide in smoothly and slowly */
+#now-playing-toast.toast-visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Slide out slowly */
+#now-playing-toast.toast-hidden {
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Album Art */
+#toast-album-art {
+    width: 68px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    border: 1px solid #d4c39c;
+}
+
+/* Text Container formatting */
+.toast-text-container {
+    line-height: 1.35;
+    text-align: left;
+}
+
+/* Line 1: TITLE (Brown text to match clock) */
+#toast-track-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #4a3b32;
+}
+
+/* Line 2: GAME NAME / YEAR (Brown text tone) */
+#toast-game-name {
+    font-size: 0.9rem;
+    color: #5c4a3f;
+}
+
+/* Line 3: AUTHOR (Brown text tone) */
+#toast-artist-name {
+    font-size: 0.85rem;
+    color: #6e594d;
+    font-style: italic;
+}
+
+body {
+    background-image: url(bg.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'FinkHeavy Regular', sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #3e3028;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Keeps the big container centered safely */
+}
+
+.container { 
+    text-align: center;
+    background: #87643c;
+    padding: 30px 40px;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(139, 111, 71, 0.15);
+    border: 3px solid #e2d2be;
+    width: 60%;           /* Takes up 90% of the window width, resizing dynamically */
+    max-width: 470px;     /* Keeps your large 470px cap on full screens */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+/* Ensure controls sit nicely inside the flow */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+header h1 { 
+    margin: 0;
+    font-size: 28px;
+    color: #5c4033;
+}
+
+header p {
+    margin: 15px 0 20px 0; /* Adds spacing above and below so it never collides with the logo */
+    font-size: 16px;
+    color: #ffc928;
+}
+
+.timer-card {
+    font-size: 95px;
+    font-weight: 400;
+    background: #a1947f;
+    padding: 5px 20px; /* Added horizontal padding so it doesn't overflow */
+    border-radius: 16px; 
+    border: 2px dashed #d4c3b0;
+    margin-bottom: 24px;
+    color: white;
+    -webkit-text-stroke: #d3ceb8 1px;
+    width: 100%;
+    box-sizing: border-box;
+    user-select: none; /* Prevents random blue selection highlights */
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button { 
+    background-color: #3ee192;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'seurat', sans-serif;
+    font-weight: 700;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #6ecb6e;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+button:hover {
+    background-color: #44ba89;
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #6ecb6e;
+}
+
+#reset-btn {
+    background-color: #de5d6c;
+    box-shadow: 0 4px 0 #b3665f;
+}
+
+#reset-btn:active {
+    box-shadow: 0 2px 0 #b3665f;
+}
+
+#break-prompt {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #739e82;
+    font-weight: 700;
+}
+
+#real-world-clock-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4a3b32;
+    background: #fcf6e5;
+    border: 3px solid #d4c39c;
+    padding: 8px 12px;
+    border-radius: 10px;
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#date-display {
+    font-size: 12px;
+    margin-bottom: 2px;
+    color: #4a3b32;
+}
+
+#real-world-clock {
+    font-size: 14px;
+}
+
+#settings-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+#settings-btn img {
+    width: 40px;
+    height: 40px;
+}
+
+#settings-btn {
+    background-color: #00c7b9;
+    border-radius: 50%;
+    border: 2px solid #80e2d3;
+    font-family: 'seurat', sans-serif;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease; /* Added 's' to seconds unit */
+}
+
+#settings-btn:hover {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#settings-menu {
+    position: fixed;
+    bottom: 80px; 
+    right: 50px;
+    top: auto;
+    left: auto;
+    transform: translate(0, 10px) scale(0.85); 
+    transform-origin: bottom right; 
+    opacity: 0;
+    pointer-events: none; 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s ease;
+    background: #e1c48b;
+    padding: 20px;
+    border-radius: 16px;
+    border: 3px solid #e2d2be;
+    width: 260px;
+    color: #4a3b32;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'seurat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 1000;
+}
+
+#settings-menu.active {
+    transform: translate(0, 0) scale(1); 
+    opacity: 1;
+    pointer-events: auto; 
+}
+
+.setting-item {
+    font-family: 'seurat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Accordion Styles for Compact Menus */
+.settings-dropdown-header {
+    background: #d4c3b0;
+    color: #4a3b32;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid #c8b7a4;
+    transition: background-color 0.2s;
+}
+
+.settings-dropdown-header:hover {
+    background: #c8b7a4;
+}
+
+.settings-dropdown-header .arrow {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.settings-dropdown-header.active .arrow {
+    transform: rotate(180deg);
+}
+
+.settings-dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 4px;
+}
+
+.settings-dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 4px;
+}
+
+.settings-dropdown-content.open {
+    max-height: 400px;
+    padding: 6px 4px;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setting-item p, 
+.setting-item label {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+    color: #4a3b32;
+    text-align: left;
+}
+
+/* Dropdown & Stepper Inputs */
+.setting-item select, 
+.setting-item input[type="number"] {
+    background: #f4e8cb;
+    border: 2px solid #e2d2be;
+    border-radius: 8px;
+    padding: 6px;
+    color: #4a3b32;
+    font-family: 'seurat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Hide default spinner arrows for Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide default spinner arrows for Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.stepper-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stepper-container input[type="number"] {
+    width: 60px;
+    text-align: center;
+}
+
+.step-btn {
+    background-color: #00c7b9;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #6ecb6e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.step-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #6ecb6e;
+}
+
+#save-exit-btn {
+    background: #33b033;
+    
+color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#save-exit-btn:hover {
+    background: #399e39;
+}

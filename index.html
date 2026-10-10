@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<!--head-->
+<head>
+    <link rel = "stylesheet" href = "style.css">
+    <title> the roost </title>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="images/jpg" href="isabelle.jpg">
+</head>
+
+<!--Titlebar-->
+
+<div id="custom-titlebar">
+    <div class="titlebar-drag-region">
+        <span class="titlebar-title">The Roost</span>
+    </div>
+    <div class="titlebar-controls">
+        <button id="minimize-btn">&#8211;</button>
+        <button id="close-btn">&#10005;</button>
+    </div>
+</div>
+
+<!--TOAST-->
+<div id="now-playing-toast" class="toast-hidden">
+    <img id="toast-album-art" src="" alt="Album Art">
+    <div class="toast-text-container">
+        <span id="toast-track-name">Title</span><br>
+        <span id="toast-game-name">Game Name / Year</span><br>
+        <span id="toast-artist-name">Author</span>
+    </div>
+</div>
+
+<!--body-->
+<body>
+        <div class = "container">
+            <header> 
+                <img src="Untitled.png" class="logo" alt="The Roost Logo">
+                <p style="font-size:20px; margin-top: 15px;">Focus cozily with Brewster's delicious coffee, Mayor Rishi!</p>
+            </header>
+
+<!--timer-->
+        <div class = "timer-card">
+             <p style = "font-size:24px;" id="session-heading">Focusing...</p>
+        <div>
+        <span id = "minutes">25</span>:<span id = "seconds">00</span>
+          </div>
+        </div>
+
+<!--control-->
+            <div class = "controls">
+                <button id="start-pause-btn"> Start </button>
+                <button id = "reset-btn">  Reset! </button>
+            </div>
+
+<!-- Dual Audio Players for Seamless Crossfading -->
+            <audio id="bg-music-a"></audio>
+            <audio id="bg-music-b"></audio>
+
+            <audio id="rain-audio-a"></audio>
+            <audio id="rain-audio-b"></audio>
+
+            <audio id="thunder-audio-a"></audio>
+            <audio id="thunder-audio-b"></audio>
+
+<!--clock-->
+            <div id="real-world-clock-container">
+                <div id="date-display">Tuesday, August 18</div>
+                 <div id="real-world-clock">00:00:00 PM</div>
+            </div>
+
+<!-- settings -->
+<div id="settings-container">
+    <button id="settings-btn"> <img src = "settings_icon.png" alt="icon"> </button>
+
+    <div id="settings-menu">
+        
+    <!-- Music Section Dropdown -->
+    <div class="settings-dropdown-header" data-target="music-section">
+        <span>Music Settings </span>
+        <span class="arrow">▼</span>
+    </div>
+    <div id="music-section" class="settings-dropdown-content">
+        <div class="setting-item">
+            <p> Album: </p>
+            <select id="music-select">
+                <option value="shuffle"> MEGA MIX! ALL OSTS! </option>
+                <option value="ac-gc">Animal Crossing (GC, N64)</option>
+                <option value="ac-ww">Animal Crossing - Wild World (DS)</option>
+                <option value="ac-cf">Animal Crossing - City Folk (Wii)</option>
+                <option value="ac-nl">Animal Crossing - New Leaf (3DS)</option>
+                <option value="ac-nh">Animal Crossing: New Horizons</option>
+                <option value="mc-alpha">Minecraft - Volume Alpha</option>
+                <option value="mc-beta">Minecraft - Volume Beta</option>
+                <option value="mario-galaxy">Super Mario Galaxy</option>
+                <option value="zelda-botw">The Legend of Zelda: Breath of the Wild</option>
+            </select>
+        </div>
+        <div class="setting-item">
+            <label for="music-slider"> Music Volume: </label>
+            <input type="range" id="music-slider" min="0" max="100" value="50">
+        </div>
+        <div class="setting-item">
+            <label for="rain-slider">Rain Volume: </label>
+            <input type="range" id="rain-slider" min="0" max="100" value="0">
+        </div>
+        <div class="setting-item">
+            <label for="thunder-slider">Thunderstorm Volume: </label>
+            <input type="range" id="thunder-slider" min="0" max="100" value="0">
+        </div>
+    </div>
+
+    <!-- Timer Section Dropdown -->
+    <div class="settings-dropdown-header" data-target="timer-section">
+        <span>Timer Settings</span>
+        <span class="arrow">▼</span>
+    </div>
+    <div id="timer-section" class="settings-dropdown-content">
+        <div class="setting-item">
+            <label>Focus Session (mins):</label>
+            <div class="stepper-container">
+                <button type="button" class="step-btn" id="focus-minus">-</button>
+                <input type="number" id="focus-input" value="25" min="1" max="120">
+                <button type="button" class="step-btn" id="focus-plus">+</button>
+            </div>
+        </div>
+
+        <div class="setting-item">
+            <label>Coffee Break! (mins):</label>
+            <div class="stepper-container">
+                <button type="button" class="step-btn" id="break-minus">-</button>
+                <input type="number" id="break-input" value="5" min="1" max="60">
+                <button type="button" class="step-btn" id="break-plus">+</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="save-exit-btn"> Save & Exit </button>
+    
+</div>
+</div>
+<script src = "renderer.js" defer> </script>
+</body>
+</html>

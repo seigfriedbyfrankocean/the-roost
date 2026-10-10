@@ -1,0 +1,10 @@
+node_modules/
+.dist/
+out/
+.env
+Thumbs.db
+OSTs/
+ambience/
+fx/
+album-covers/
+font/
