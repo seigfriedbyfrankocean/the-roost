@@ -5,8 +5,15 @@ An Animal Crossing "Roost" cafe themed Pomodoro focus timer, built as a desktop 
 ![The Roost banner screen](screenshot.png)
 
 ## Features
-- [list what's in the barebones version, e.g. focus and break timer, music player, settings]
-- Built in sound engine with crossfade and shuffled tracks
+
+* **Pomodoro Timer**: Fully customizable focus and break intervals with local state persistence via `localStorage`.
+* **Dual-Player Audio Architecture**: Dual active/standby audio player setup that enables smooth, zero-latency track crossfading.
+* **Dynamic Weather Ambiance**: Independent, layered background soundscapes for rain and thunder with smooth volume ramping and normalization.
+* **Smart Playlist Shuffling**: Unbiased randomization on startup and automatic playlist loops powered by the Fisher-Yates algorithm.
+* **Local Caching System**: Pre-fetches and caches local audio files on boot to eliminate disk-read latency.
+* **Custom "Now Playing" Toasts**: Sleek overlay notifications displaying track titles, source game tags, and album art whenever a song changes.
+* **Cozy Aesthetic UI**: Styled around a classic *Animal Crossing* cafe theme with custom typography, retro buttons, and unhighlightable UI elements for a native desktop feel.
+* **Native Desktop Integration**: Built with Electron, featuring custom window controls (minimize/close) and lightweight startup execution.
 
 ## Planned
 - Streak system
